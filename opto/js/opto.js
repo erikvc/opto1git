@@ -80,6 +80,19 @@ function getSubcategoryText(subCategoryID, promptID){
     })
 }
 
+function loadGptResponse(subCategoryID, promptID){
+    $.ajax({
+        url: "optoApi/loadGptResponse.php",
+        type: "GET",
+        crossDomain: true,
+        data: "id="+subCategoryID+"&promptID="+promptID,
+        dataType: "html",
+        success: function(retorno){
+            insertTextDB(retorno, promptID)
+        }
+    })
+}
+
 function insertTextDB(text, promptID){
     $.ajax({
         url: "optoApi/insertTextDB.php",
