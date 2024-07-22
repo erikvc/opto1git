@@ -44,6 +44,11 @@ if(isset($_SESSION['OPTO1'])){
                 </form>
             </div>
         </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center">
+                <p class="mt-4"><a href="login.php">Clique Here To Login!</a></p>
+            </div>
+        </div>
         
         
     </div>

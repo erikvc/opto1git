@@ -52,10 +52,27 @@ if (isset($_SESSION['OPTO1'])) {
             $('#login').submit(function(event) {
                 event.preventDefault();
                 
-                var Lemail = $("#Lemail").val();
-                var Lpassword = $("#Lpassword").val();
-
-                login(Lemail, Lpassword);
+                $.ajax({
+                    url: "optoApi/loginUser.php",
+                    type: "GET",
+                    crossDomain: true,
+                    data: "Lemail="+email+"&Lpassword="+password,
+                    success: function(retorno){
+                        if(retorno == "ok"){
+                            retorno = 'ok';
+                            window.location.href="dashboard.php";
+                        }else if(retorno == "erro1"){
+                            alert("Incorrect Password!");
+                            retorno = 'erro1';
+                        }else if(retorno == "erro2"){
+                            alert("This User does not Exist!");
+                            retorno = 'erro2';
+                        }
+                    },
+                    error: function(){
+                        alert("erro");
+                    }
+                })
 
             });
         });
