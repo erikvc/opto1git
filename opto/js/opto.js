@@ -61,17 +61,30 @@ function createPrompt(subCategoryID){
         data: "id="+subCategoryID,
         dataType: "html",
         success: function(retorno){
-            getSubcategoryText(subCategoryID);
+            getSubcategoryText(subCategoryID, retorno);
         }
     })
 }
 
-function getSubcategoryText(subCategoryID){
+function getSubcategoryText(subCategoryID, promptID){
     $.ajax({
         url: "optoApi/getSubCategoryText.php",
         type: "GET",
         crossDomain: true,
         data: "id="+subCategoryID,
+        dataType: "html",
+        success: function(retorno){
+            insertTextDB(retorno, promptID)
+        }
+    })
+}
+
+function insertTextDB(text, promptID){
+    $.ajax({
+        url: "optoApi/insertTextDB.php",
+        type: "GET",
+        crossDomain: true,
+        data: "text="+text+"&promptID="+promptID,
         dataType: "html",
         success: function(retorno){
             alert(retorno);
