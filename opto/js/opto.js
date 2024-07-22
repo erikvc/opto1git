@@ -75,6 +75,7 @@ function getSubcategoryText(subCategoryID, promptID){
         dataType: "html",
         success: function(retorno){
             insertTextDB(retorno, promptID)
+            alert("teste");
         }
     })
 }
