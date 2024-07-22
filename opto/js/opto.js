@@ -74,13 +74,13 @@ function getSubcategoryText(subCategoryID, promptID){
         data: "id="+subCategoryID,
         dataType: "html",
         success: function(retorno){
-            insertTextDB(retorno, promptID)
-            alert("teste");
+            insertTextDB(retorno, promptID);
+            loadGptResponse(subCategoryID, promptID, retorno);
         }
     })
 }
 
-function loadGptResponse(subCategoryID, promptID){
+function loadGptResponse(subCategoryID, promptID, text){
     $.ajax({
         url: "optoApi/loadGptResponse.php",
         type: "GET",
