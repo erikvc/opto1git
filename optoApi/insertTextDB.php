@@ -10,7 +10,7 @@ $text = $_GET['text'];
 $promptID = $_GET['promptID'];
 
 
-$sqlinsert = mysqli_query($conexao, "INSERT INTO gpttext (text, promptID)VALUES('$text', '$promptID')"); 
+$sqlinsert = mysqli_query($conexao, "INSERT INTO gpttext (text, prompt_id)VALUES('$text', '$promptID')"); 
 
 echo "ok";
 

@@ -33,7 +33,7 @@ function openSubCategory(categoryID){
         success: function(retorno){
             $("#recebeBTO").empty();
             for(var i=0;retorno.length>i;i++){
-                $("#recebeBTO").append('<a href="prompt.php?id='+retorno[i].id+'" onClick="return createPrompt('+retorno[i].id+')"><div class="item p-2">'+retorno[i].name+'</div></a>');
+                $("#recebeBTO").append('<a href="#" onClick="return createPrompt('+retorno[i].id+')"><div class="item p-2">'+retorno[i].name+'</div></a>');
             }
         }
     })
@@ -64,6 +64,8 @@ function createPrompt(subCategoryID){
             getSubcategoryText(subCategoryID, retorno);
         }
     })
+
+    window.location.href="prompt.php";
 }
 
 function getSubcategoryText(subCategoryID, promptID){
@@ -78,6 +80,8 @@ function getSubcategoryText(subCategoryID, promptID){
             loadGptResponse(subCategoryID, promptID, retorno);
         }
     })
+
+    return 1;
 }
 
 function loadGptResponse(subCategoryID, promptID, text){
@@ -89,6 +93,8 @@ function loadGptResponse(subCategoryID, promptID, text){
         dataType: "html",
         success: function(retorno){
             insertTextDB(retorno, promptID)
+            loadFullTextPrompt(promptID)
+            loadPromptPage(promptID)
         }
     })
 }
@@ -102,6 +108,33 @@ function insertTextDB(text, promptID){
         dataType: "html",
         success: function(retorno){
             alert(retorno);
+        }
+    })
+}
+
+function loadPromptPage(promptID){
+    localStorage.setItem("promptID", promptID);
+    alert(promptID)
+    window.location.href="prompt.php";
+}
+
+
+
+function loadFullTextPrompt(promptID){
+
+    var promptID = localStorage.getItem("promptID");
+
+    $.ajax({
+        url: "optoApi/loadFullTextPrompt.php",
+        type: "GET",
+        crossDomain: true,
+        data: "&promptID="+promptID,
+        dataType: "json",
+        success: function(retorno){
+            $("#responseText").empty();
+            for(var i=0;retorno.length>i;i++){
+                $("#responseText").append('<p>'+retorno[0].text+'</p><BR><BR>');
+            }
         }
     })
 }

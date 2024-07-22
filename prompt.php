@@ -7,7 +7,7 @@ if(!isset($_SESSION['OPTO1'])){
     echo '<script>window.location.href="login.php"</script>';
 }
 
-$subCategoryID = $_GET['id'];
+//$subCategoryID = $_GET['id'];
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ $subCategoryID = $_GET['id'];
             <input type="text" class="form-control" id="serviceInput" placeholder="Enter service name">
           </div>
           <!-- Hidden input to store subCategoryID -->
-          <input type="hidden" id="subCategoryID" value="<?php echo $subCategoryID; ?>">
+          <input type="hidden" id="subCategoryID" value="">
           <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
       </div>
@@ -45,9 +45,18 @@ $subCategoryID = $_GET['id'];
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- OPTO JS -->
+  <script src="opto/js/opto.js"></script>
   <!-- Custom JS -->
   <script>
     $(document).ready(function() {
+
+      var promptID = localStorage.getItem("promptID");
+      alert(promptID)
+
+      loadFullTextPrompt(promptID);
+
+      /*
       $('#serviceForm').on('submit', function(event) {
         event.preventDefault();
         const serviceName = $('#serviceInput').val();
@@ -64,6 +73,7 @@ $subCategoryID = $_GET['id'];
           }
         });
       });
+      */
     });
   </script>
 </body>
